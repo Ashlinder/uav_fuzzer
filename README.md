@@ -47,6 +47,7 @@ Fuzz mode adds context-aware checks that combine multiple columns
 anomalies that basic mode cannot. **Result: 8 findings** — same 4 as
 basic, plus two `GPS_LOSS` events during navigation, one
 `ABNORMAL_VELOCITY`, and one `TAKEOFF_WHILE_DISARMED`. 
+
 ---
 
 #### 1.3 Basic mode — command samples
