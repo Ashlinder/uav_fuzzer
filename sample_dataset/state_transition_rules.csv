@@ -1,0 +1,21 @@
+current_state,event_or_command,next_state,allowed,severity_if_violated,rationale
+IDLE,ARM,ARMED,YES,NONE,Vehicle may arm from idle when pre-flight checks pass
+IDLE,TAKEOFF,ERROR,NO,HIGH,Takeoff must not occur before arming
+ARMED,TAKEOFF,TAKEOFF,YES,NONE,Armed vehicle may start takeoff
+TAKEOFF,ALT_REACHED,HOVER,YES,NONE,Takeoff completes into hover
+HOVER,MOVE,NAVIGATE,YES,NONE,Move command starts navigation
+HOVER,DISARM,ERROR,NO,HIGH,Disarm during hover is unsafe
+NAVIGATE,MOVE,NAVIGATE,YES,NONE,Navigation can continue with move commands
+NAVIGATE,GPS_LOSS,FAILSAFE,YES,MEDIUM,GPS loss should trigger failsafe behaviour
+NAVIGATE,RTL,RETURN_HOME,YES,NONE,RTL command initiates return home
+NAVIGATE,DISARM,ERROR,NO,HIGH,Disarm during navigation is unsafe
+FAILSAFE,RTL,RETURN_HOME,YES,NONE,Failsafe may transition to RTL
+FAILSAFE,MOVE,ERROR,NO,HIGH,Manual movement during failsafe may be unsafe
+RETURN_HOME,GPS_INVALID,ERROR,NO,HIGH,Invalid GPS during return home is a critical anomaly
+RETURN_HOME,LAND,LANDING,YES,NONE,Return home can proceed to landing
+LANDING,TOUCHDOWN,LANDED,YES,NONE,Landing completes after touchdown
+LANDED,DISARM,IDLE,YES,NONE,Disarm after landing returns to idle
+HOVER,ALTITUDE_NEGATIVE,ERROR,NO,HIGH,Negative altitude while airborne is unsafe
+HOVER,ALTITUDE_EXTREME,ERROR,NO,HIGH,Extreme altitude command is unsafe
+ARMED,DISARM,IDLE,YES,NONE,Disarm allowed before takeoff
+IDLE,MOVE,ERROR,NO,MEDIUM,Move command in idle state is invalid

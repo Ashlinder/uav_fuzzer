@@ -1,0 +1,21 @@
+packet_id,msg_type,command,source_system,target_system,target_component,param1,param2,param3,param4,param5,param6,param7,description,expected_status,expected_severity,expected_reason
+1,HEARTBEAT,NONE,1,1,1,,,,,,,,Normal heartbeat,ACCEPTED,NONE,Valid status message
+2,COMMAND_LONG,ARM,1,1,1,1,,,,,,,Arm vehicle,ACCEPTED,NONE,Valid arm command
+3,COMMAND_LONG,TAKEOFF,1,1,1,30,0,0,0,,,,Takeoff to 30m,ACCEPTED,NONE,Valid takeoff altitude
+4,COMMAND_LONG,MOVE,1,1,1,10,20,30,,,,,Move local coordinates,ACCEPTED,NONE,Valid movement command
+5,GLOBAL_POSITION_INT,NONE,1,1,1,,,,,1.3521,103.8198,30,Valid GPS position,ACCEPTED,NONE,GPS within valid range
+6,COMMAND_LONG,RTL,1,1,1,1,,,,,,,Return to launch,ACCEPTED,NONE,Valid RTL command
+7,COMMAND_LONG,LAND,1,1,1,,,,,,,,Land command,ACCEPTED,NONE,Valid land command
+8,COMMAND_LONG,DISARM,1,1,1,1,,,,,,,Disarm command,ACCEPTED,NONE,Valid disarm command
+9,COMMAND_LONG,TAKEOFF,1,1,1,-10,0,0,0,,,,Negative takeoff altitude,UNSAFE,HIGH,Altitude below safe range
+10,COMMAND_LONG,TAKEOFF,1,1,1,999999,0,0,0,,,,Extreme takeoff altitude,UNSAFE,HIGH,Altitude above safe range
+11,COMMAND_LONG,MOVE,1,1,1,999999,20,30,,,,,Extreme movement value,UNSAFE,HIGH,Movement parameter outside range
+12,GLOBAL_POSITION_INT,NONE,1,1,1,,,,,999,103.8198,30,Invalid latitude,UNSAFE,HIGH,Latitude outside -90 to 90
+13,GLOBAL_POSITION_INT,NONE,1,1,1,,,,,1.3521,999,30,Invalid longitude,UNSAFE,HIGH,Longitude outside -180 to 180
+14,COMMAND_LONG,FLYFAST,1,1,1,999,,,,,,,Unknown command,REJECTED,MEDIUM,Command not in allowed set
+15,COMMAND_LONG,LAND,1,1,1,,,,,,,,Landing while GPS fix unavailable,WARN,MEDIUM,Requires state/context validation
+16,COMMAND_LONG,DISARM,1,1,1,1,,,,,,,Disarm while in hover/nav state,WARN,MEDIUM,Potential unsafe state transition
+17,COMMAND_LONG,TAKEOFF,1,1,1,abc,0,0,0,,,,Non-numeric altitude,REJECTED,MEDIUM,Parameter type error
+18,BAD_MESSAGE,ARM,1,1,1,1,,,,,,,Malformed message type,REJECTED,MEDIUM,Invalid message type
+19,COMMAND_LONG,ARM,0,1,1,1,,,,,,,Invalid source system,REJECTED,LOW,Source system out of expected range
+20,COMMAND_LONG,MOVE,1,1,1,10,,30,,,,,Missing movement parameter,REJECTED,MEDIUM,Missing required parameter
