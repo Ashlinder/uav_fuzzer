@@ -19,7 +19,6 @@ row) and two scan modes (selected from the sidebar).
 ![Step-by-step UI guide](screenshots/steps.png)
 
 1. **Choose a scan mode** 
-2. **(Fuzz mode only, optional)** 
 3. **Upload your file** 
 4. **Click ▶ Run scan.** 
 
